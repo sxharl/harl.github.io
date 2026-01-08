@@ -9,10 +9,6 @@
         body {
             margin: 0;
             padding: 0;
-            overflow-x: auto;
-            overflow-y: hidden;
-            display: flex;
-            align-items: center;
             background-color: #f6f6f6;
         }
 
@@ -21,8 +17,8 @@
             height: 620px;
             background: #fff;
             margin: 0 auto;
-            overflow: hidden;
-            overflow-y: scroll;
+            overflow-x: scroll;
+            overflow-y: hidden;
         }
 
         .image-container {
@@ -32,13 +28,11 @@
         }
 
         .image-item {
-            margin: 10px;
-            display: inline-block;
-            vertical-align: top;
+            width: 340px;
+            height: 500px;
         }
 
         .image-item img {
-            max-height: 100vh;
             width: auto;
             max-width: 100%;
             object-fit: contain;
@@ -81,6 +75,9 @@
             } else if (targetPicture === 'p2') {
                 loadImage('sourcePicture/source2/p1.png', container);
                 loadImage('sourcePicture/source2/p2.png', container);
+            } else if (targetPicture === 'p2') {
+                loadImage('sourcePicture/source3/p1.png', container);
+                loadImage('sourcePicture/source3/p2.png', container);
             } else {
                 console.log("没有正确的对应图片位置")
                 return;
