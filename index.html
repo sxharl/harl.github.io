@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片展示</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: auto;
+            overflow-y: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .image-container {
+            display: flex;
+            white-space: nowrap;
+        }
+        
+        .image-item {
+            margin: 10px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        
+        .image-item img {
+            max-height: 100vh;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container" id="imageContainer">
+        <!-- 图片将通过JavaScript动态加载 -->
+    </div>
+
+    <script>
+        // 获取URL参数
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // 根据参数加载图片
+        function loadImages() {
+            const targetPicture = getUrlParameter('targetPicture');
+            const container = document.getElementById('imageContainer');
+            
+            if (!targetPicture) {
+                console.log("没有正确的对应图片位置")
+                return;
+            }
+            // 清空容器
+            container.innerHTML = '';
+
+            // 根据参数加载对应的图片
+            if (targetPicture === 'p1') {
+                loadImage('sourcePicture/source1/p1.png', container);
+                loadImage('sourcePicture/source1/p2.png', container);
+            } else if (targetPicture === 'p2') {
+                loadImage('sourcePicture/source2/p1.png', container);
+                loadImage('sourcePicture/source2/p2.jpg', container);
+            } else {
+                console.log("没有正确的对应图片位置")
+                return;
+            }
+        }
+
+        // 加载单个图片
+        function loadImage(src, container) {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `图片 ${src}`;
+            img.style.maxHeight = '90vh';
+            
+            const div = document.createElement('div');
+            div.className = 'image-item';
+            div.appendChild(img);
+            
+            container.appendChild(div);
+        }
+
+        // 页面加载完成后执行
+        window.onload = function() {
+            loadImages();
+        };
+    </script>
+</body>
+</html>
