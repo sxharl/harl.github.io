@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图片展示</title>
+    <title>证件预览</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             overflow-x: auto;
             overflow-y: hidden;
-            height: 100vh;
             display: flex;
             align-items: center;
+            background-color: #f6f6f6;
         }
-        
+
+        .wrapper {
+            width: 940px;
+            height: 620px;
+            background: #fff;
+            margin: 0 auto;
+            overflow: hidden;
+            overflow-y: scroll;
+        }
+
         .image-container {
+            padding: 20px 60px;
+            height: 500px;
             display: flex;
-            white-space: nowrap;
         }
-        
+
         .image-item {
             margin: 10px;
             display: inline-block;
             vertical-align: top;
         }
-        
+
         .image-item img {
             max-height: 100vh;
             width: auto;
@@ -34,9 +45,12 @@
         }
     </style>
 </head>
+
 <body>
-    <div class="image-container" id="imageContainer">
-        <!-- 图片将通过JavaScript动态加载 -->
+    <div class="wrapper">
+        <div class="image-container" id="imageContainer">
+            <!-- 图片将通过JavaScript动态加载 -->
+        </div>
     </div>
 
     <script>
@@ -50,7 +64,7 @@
         function loadImages() {
             const targetPicture = getUrlParameter('targetPicture');
             const container = document.getElementById('imageContainer');
-            
+
             if (!targetPicture) {
                 console.log("没有正确的对应图片位置")
                 return;
@@ -64,7 +78,7 @@
                 loadImage('sourcePicture/source1/p2.png', container);
             } else if (targetPicture === 'p2') {
                 loadImage('sourcePicture/source2/p1.png', container);
-                loadImage('sourcePicture/source2/p2.jpg', container);
+                loadImage('sourcePicture/source2/p2.png', container);
             } else {
                 console.log("没有正确的对应图片位置")
                 return;
@@ -77,18 +91,19 @@
             img.src = src;
             img.alt = `图片 ${src}`;
             img.style.maxHeight = '90vh';
-            
+
             const div = document.createElement('div');
             div.className = 'image-item';
             div.appendChild(img);
-            
+
             container.appendChild(div);
         }
 
         // 页面加载完成后执行
-        window.onload = function() {
+        window.onload = function () {
             loadImages();
         };
     </script>
 </body>
+
 </html>
